@@ -11,8 +11,17 @@ repositories {
     mavenCentral()
 }
 
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'idea'
+
 dependencies {
+    implementation 'commons-beanutils:commons-beanutils:1.9.4'
     implementation group: 'org.antlr', name: 'antlr4-runtime', version: '4.8-1'
 
-    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    compileOnly('org.projectlombok:lombok:1.16.20')
+    annotationProcessor 'org.projectlombok:lombok:1.16.20'
+
+    testImplementation "org.spockframework:spock-core:1.0-groovy-2.4"
+    testImplementation "org.codehaus.groovy:groovy-all:2.4.7"
 }
