@@ -5,6 +5,7 @@ import org.pathref.model.SimpleObject
 import spock.lang.Specification
 
 class PropertySetterSpec extends Specification {
+
     void setup() {
     }
 
@@ -15,10 +16,23 @@ class PropertySetterSpec extends Specification {
         def value = "BANANAS"
 
         when:
-        SimpleObject instantiatedClass = PropertySetter.setProperty(key, value, clazz)
+        SimpleObject instantiatedClass = PropertySetter.setProperty(clazz, key, value)
 
         then:
         instantiatedClass.getStringProperty() == "BANANAS"
+    }
+
+    def "given a key to set and a class to instantiate, when we call PropertySetter.setProperty with list item to set, then the Object is instantiated and the nested property is set"() {
+        given:
+        def key = "stringList"
+        def clazz = SimpleObject.class
+        def value = "BANANAS"
+
+        when:
+        SimpleObject instantiatedClass = PropertySetter.setProperty(clazz, key, value)
+
+        then:
+        instantiatedClass.getStringList().get(0) == "BANANAS"
     }
 
     def "given a key to set and a class to instantiate, when we call PropertySetter.setProperty with a nested object structure, then the Object is instantiated and the nested property is set"() {
@@ -28,7 +42,7 @@ class PropertySetterSpec extends Specification {
         def value = "BANANAS"
 
         when:
-        SimpleNestedObject instantiatedClass = PropertySetter.setProperty(key, value, clazz)
+        SimpleNestedObject instantiatedClass = PropertySetter.setProperty(clazz, key, value)
 
         then:
         instantiatedClass.getSimpleObject().getStringProperty() == "BANANAS"

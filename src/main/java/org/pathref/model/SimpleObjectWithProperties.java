@@ -7,6 +7,8 @@ import lombok.Setter;
 @Builder
 @Setter
 @Getter
-public class SimpleNestedObject {
-    private SimpleObject simpleObject;
+public class SimpleObjectWithProperties {
+
+    private String valueToSearchBy;
+    private String valueToReturn;
 }
